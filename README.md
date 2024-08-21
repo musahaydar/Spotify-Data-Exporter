@@ -1,6 +1,6 @@
 # Spotify Data Exporter
 
-This script allows you to export metadata from your Spotify account. To use it, you must create your own app on [developer.spotify.com/](https://developer.spotify.com), and provide your app's client ID and secret.
+This script allows you to export metadata from your Spotify account. To use it, you must create your own app on [developer.spotify.com](https://developer.spotify.com), and provide your app's client ID and secret.
 
 ## Setup
 
