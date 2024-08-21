@@ -6,7 +6,7 @@ This script allows you to export metadata from your Spotify account. To use it, 
 
 This project primarily relies on the [Spotipy](spotipy.readthedocs.io) library to make calls to the Spotify WebAPI. 
 - Install requirments with `pip install -r requirements.txt`
-- Create Spotify Developer App with callback `https://localhost:8000/callback/`
+- Create Spotify Developer App with redirect URI `https://localhost:8000/callback/`
 - Add `client_id` and `client_secret` to `config.py`
 
 ## Usage
