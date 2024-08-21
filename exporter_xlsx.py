@@ -14,6 +14,7 @@ def export_albums_xlsx(sp):
     worksheet = workbook.add_worksheet()
     row_iter = 0
     
+    # TODO: add release date
     fields = ["Cover", "Title", "Artist(s)", "Spotify Link"]
     write_excel_row(worksheet, row_iter, fields)
     row_iter += 1
