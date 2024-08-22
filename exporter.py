@@ -40,9 +40,25 @@ def export_albums_csv(sp):
 
     out.close()
 
+def export_user_playlists(sp):
+    playlists = sp.current_user_playlists()
+    while playlists:
+        for i, item in enumerate(playlists['items']):
+            export_playlist_id(sp, item['id'])
+
+        if playlists['next']:
+            playlists = sp.next(playlists)
+        else:
+            playlists = None
+
+def export_playlist_file(sp, file):
+    with open(file) as f:
+        for line in f:
+            export_playlist_url(sp, line.rstrip())
+
 def export_playlist_url(sp, url):
     # get the ID out of the URL and calls export_playlist_id
-    id = re.search("\/.*\/(.*)\?", url)
+    id = re.search("\/.*\/([A-Za-z0-9]*)", url)
 
     if id is None:
         print("Error: please enter a valid Spotify URL")
@@ -103,6 +119,7 @@ def main():
     # playlist arguments
     parser.add_argument("-p", "--playlists", action="store_true", help="Export user playlists.")
     parser.add_argument("--playlist_url", type=str, default="")
+    parser.add_argument("--playlist_file", type=str, default="")
 
     # album arguments
     parser.add_argument("-a", "--albums", action="store_true", help="Export user saved albums to CSV.")
@@ -128,12 +145,11 @@ def main():
         print("TODO")
     
     if args.playlists:
-        print("TODO")
+        export_user_playlists(sp)
+    elif args.playlist_file:
+        export_playlist_file(sp, args.playlist_file)
     elif args.playlist_url:
         export_playlist_url(sp, args.playlist_url)
-
-    else:
-        print("Use --albums to export user saved albums to CSV")
 
 if __name__ == '__main__':
     main()
