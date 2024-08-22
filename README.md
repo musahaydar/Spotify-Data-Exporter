@@ -27,6 +27,12 @@ To export your public playlists, run the following command:
 ./exporter.py --playlists
 ```
 
+For each playlist, this will produce a folder named after the playlist (if the playlist's name only contains special characters, the folder generated will be named by the playlist's ID). The folder will contain:
+
+- The playlist's cover image
+- `playlist_name.txt` which contains the original name of the playlist
+- `tracks.csv` which contains a list of tracks, including their title, artist(s), album, release date, date added to playlist, and their Spotify URLs
+
 This function will only output the playlists that are public/on your profile. If you want to export private playlists, create a `.txt` file listing your playlists and use the following command.
 
 ### Export Playlists from File
@@ -41,16 +47,10 @@ Since you will be authenticated to the Spotify API, you are able to export your 
 
 ### Export Playlist to CSV from URL
 
-Run the following command, providing the `<playlist_url>` from Spotify, to export a playlist to a single CSV. This will produce a folder named after the playlist (if the playlist's name only contains special characters, the folder generated will be named by the playlist's ID). 
+Run the following command, providing the `<playlist_url>` from Spotify, to export an individual playlist:
 
 ```
 ./exporter.py --playlist_url <playlist_url>
 ```
-
-The folder will contain:
-
-- The playlist's cover image
-- `playlist_name.txt` which contains the original name of the playlist
-- `tracks.csv` which contains a list of tracks, including their title, artist(s), album, release date, date added to playlist, and their Spotify URLs
 
 You may want to provide the playlist url in quotation marks (e.g. `./exporter.py --playlist_url "https://open.spotify.com/playlist/..."`) to prevent issues with special characters in the command line
