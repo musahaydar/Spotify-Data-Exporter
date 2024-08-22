@@ -11,7 +11,7 @@ This project primarily relies on the [Spotipy](spotipy.readthedocs.io) library t
 
 ## Usage
 
-### Export Saved Albums to CSV
+### Export Your Saved Albums to CSV
 
 Export user saved albums list to a CSV file by running
 ```
@@ -19,7 +19,7 @@ Export user saved albums list to a CSV file by running
 ```
 When run initially, your web browser will be opened for you to log in to Spotify. Paste the URL from web broswer when prompted once you've logged in.
 
-### Export Playlists
+### Export Your Playlists
 
 To export your public playlists, run the following command:
 
@@ -35,7 +35,7 @@ For each playlist, this will produce a folder named after the playlist (if the p
 
 This function will only output the playlists that are public/on your profile. If you want to export private playlists, create a `.txt` file listing your playlists and use the following command.
 
-### Export Playlists from File
+#### Export Playlists from File
 
 To export playlists from a custom list, create a `.txt` file where each line contains the Spotify URL to each playlist. Then run the following command, providing the path to the file:
 
@@ -45,7 +45,7 @@ To export playlists from a custom list, create a `.txt` file where each line con
 
 Since you will be authenticated to the Spotify API, you are able to export your private playlists using this command, if their URLs are included in your list. You can also include any other public playlists you wish to export.
 
-### Export Playlist to CSV from URL
+#### Export Playlist to CSV from URL
 
 Run the following command, providing the `<playlist_url>` from Spotify, to export an individual playlist:
 
