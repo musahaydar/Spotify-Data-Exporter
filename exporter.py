@@ -141,8 +141,8 @@ def main():
     if args.albums:
         export_albums_csv(sp)
     elif args.albums_xlsx:
-        # exporter_xlsx.export_albums_xlsx(sp)
-        print("TODO")
+        print("NOTE: this feature is in development. Change the number of albums exported in exporter_xlsx.py.")
+        exporter_xlsx.export_albums_xlsx(sp)
     
     if args.playlists:
         export_user_playlists(sp)

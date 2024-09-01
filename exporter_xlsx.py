@@ -15,7 +15,7 @@ def export_albums_xlsx(sp):
     row_iter = 0
     
     # TODO: add release date
-    fields = ["Cover", "Title", "Artist(s)", "Spotify Link"]
+    fields = ["", "Title", "Artist(s)", "Spotify Link"]
     write_excel_row(worksheet, row_iter, fields)
     row_iter += 1
 
@@ -37,11 +37,13 @@ def export_albums_xlsx(sp):
             row.append(item["album"]["external_urls"]["spotify"])
 
             # write the album cover image in first row
-            # TODO: resize the album cover to some standard size first
-            img_idx = -2
+            # TODO: scaling doesn't work properly due to differing DPIs of Images pulled from Spotify
+            img_idx = 0
+            img_height = float(item['album']['images'][img_idx]['height'])
+            scale = 64.0 / img_height
+
             img_url = item['album']['images'][img_idx]['url']
-            worksheet.insert_image(row_iter, 0, img_url, {'image_data': BytesIO(urlopen(img_url).read())})
-            worksheet.set_row_pixels(row_iter, item['album']['images'][img_idx]['height'])
+            worksheet.insert_image(row_iter, 0, img_url, {'image_data': BytesIO(urlopen(img_url).read()), 'x_scale': scale, 'y_scale': scale})
             write_excel_row(worksheet, row_iter, row, 1)
             
             row_iter += 1
