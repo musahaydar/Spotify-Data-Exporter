@@ -93,17 +93,18 @@ def export_playlist_id(sp, id):
     while tracks:
         for i, item in enumerate(tracks['items']):
             row = []
-            row.append(sanitize(item['track']['name']))
-            # append artists as comma-separated list
-            artists = sanitize(item['track']['artists'][0]['name'])
-            for ar in item['track']['artists'][1:]:
-                artists += ", " + sanitize(ar['name'])
-            row.append(artists)
-            row.append(sanitize(item["track"]["album"]["name"]))
-            row.append(item["track"]["album"]["release_date"])
-            row.append(item["added_at"])
-            row.append(item["track"]["external_urls"]["spotify"])
-            csvfile.writerow(row)
+            if item['track']:
+                row.append(sanitize(item['track']['name']))
+                # append artists as comma-separated list
+                artists = sanitize(item['track']['artists'][0]['name'])
+                for ar in item['track']['artists'][1:]:
+                    artists += ", " + sanitize(ar['name'])
+                row.append(artists)
+                row.append(sanitize(item["track"]["album"]["name"]))
+                row.append(item["track"]["album"]["release_date"])
+                row.append(item["added_at"])
+                row.append(item["track"]["external_urls"]["spotify"])
+                csvfile.writerow(row)
 
         if tracks['next']:
             tracks = sp.next(tracks)
