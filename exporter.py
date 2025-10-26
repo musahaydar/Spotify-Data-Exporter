@@ -58,12 +58,12 @@ def export_playlist_file(sp, file):
 
 def export_playlist_url(sp, url):
     # get the ID out of the URL and calls export_playlist_id
-    id = re.search("\/.*\/([A-Za-z0-9]*)", url)
+    id = re.search("/.*/([A-Za-z0-9]*)", url)
 
     if id is None:
         print("Error: please enter a valid Spotify URL")
         return
-    
+
     export_playlist_id(sp, id.group(1))
 
 def export_playlist_id(sp, id):
@@ -144,7 +144,7 @@ def main():
     elif args.albums_xlsx:
         print("NOTE: this feature is in development. Change the number of albums exported in exporter_xlsx.py.")
         exporter_xlsx.export_albums_xlsx(sp)
-    
+
     if args.playlists:
         export_user_playlists(sp)
     elif args.playlist_file:
