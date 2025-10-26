@@ -58,12 +58,12 @@ def export_playlist_file(sp, file):
 
 def export_playlist_url(sp, url):
     # get the ID out of the URL and calls export_playlist_id
-    id = re.search("\/.*\/([A-Za-z0-9]*)", url)
+    id = re.search("/.*/([A-Za-z0-9]*)", url)
 
     if id is None:
         print("Error: please enter a valid Spotify URL")
         return
-    
+
     export_playlist_id(sp, id.group(1))
 
 def export_playlist_id(sp, id):
@@ -103,7 +103,10 @@ def export_playlist_id(sp, id):
                 row.append(sanitize(item["track"]["album"]["name"]))
                 row.append(item["track"]["album"]["release_date"])
                 row.append(item["added_at"])
-                row.append(item["track"]["external_urls"]["spotify"])
+                if "spotify" in item["track"]["external_urls"]:
+                    row.append(item["track"]["external_urls"]["spotify"])
+                else:
+                    row.append("")
                 csvfile.writerow(row)
 
         if tracks['next']:
@@ -128,7 +131,7 @@ def main():
     args = parser.parse_args()
 
     # connect to spotify and authenticate
-    scope = "user-library-read"
+    scope = "user-library-read playlist-read-private playlist-read-collaborative"
     auth = SpotifyOAuth(
         client_id=config.client_id,
         client_secret=config.client_secret,
@@ -144,7 +147,7 @@ def main():
     elif args.albums_xlsx:
         print("NOTE: this feature is in development. Change the number of albums exported in exporter_xlsx.py.")
         exporter_xlsx.export_albums_xlsx(sp)
-    
+
     if args.playlists:
         export_user_playlists(sp)
     elif args.playlist_file:
