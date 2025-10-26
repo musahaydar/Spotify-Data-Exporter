@@ -131,7 +131,7 @@ def main():
     args = parser.parse_args()
 
     # connect to spotify and authenticate
-    scope = "user-library-read"
+    scope = "user-library-read playlist-read-private playlist-read-collaborative"
     auth = SpotifyOAuth(
         client_id=config.client_id,
         client_secret=config.client_secret,
