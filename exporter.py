@@ -103,7 +103,10 @@ def export_playlist_id(sp, id):
                 row.append(sanitize(item["track"]["album"]["name"]))
                 row.append(item["track"]["album"]["release_date"])
                 row.append(item["added_at"])
-                row.append(item["track"]["external_urls"]["spotify"])
+                if "spotify" in item["track"]["external_urls"]:
+                    row.append(item["track"]["external_urls"]["spotify"])
+                else:
+                    row.append("")
                 csvfile.writerow(row)
 
         if tracks['next']:
